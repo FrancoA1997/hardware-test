@@ -1,0 +1,68 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "*"
+      ],
+      "lib/*": [
+        "lib/*"
+      ],
+      "scss/*": [
+        "scss/*"
+      ],
+      "components/*": [
+        "components/*"
+      ],
+      "assets/*": [
+        "assets/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "actions/*": [
+        "actions/*"
+      ],
+      "validations/*": [
+        "validations/*"
+      ],
+      "data/*": [
+        "data/*"
+      ]
+    },
+    "target": "ES2017"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/providers/AuthProvider.js",
+    "src/components/ui/SelectComponent.jsx",
+    "src/lib/cart.context.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

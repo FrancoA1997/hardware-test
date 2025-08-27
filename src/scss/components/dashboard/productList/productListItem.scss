@@ -1,0 +1,116 @@
+@import '../../../abstracts/variables';
+
+.productListItem{
+    width: calc(25% - 10px);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ededed;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    padding: 10px 0px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    // box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    .featured{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: rgb(255, 206, 11);
+    }
+    .name, .price{
+        padding: 0px 10px;
+        margin-bottom: 10px;
+    }
+    .name{
+        font-weight: 600;
+        
+    }
+    .price{
+        font-weight: 500;
+    }
+    .brand{
+        position: absolute;
+        bottom: 50px;
+        right: 10px;
+        background-color: $light-gray;
+        color: $primary-color;
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        font-weight: 500;
+
+    }
+    .category{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: $light-gray;
+        color: $third-color;
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        font-weight: 500;
+    }
+    .image {
+        width: 100%;
+        height: 40%;
+        aspect-ratio: 16/9;
+        padding: 5px 5px 10px 5px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: scale-down;
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-right: auto;
+        padding: 0px 10px;
+
+        button,a {
+            width: fit-content;
+            height: fit-content;
+            border: 2px solid;
+            padding: 5px;
+            font-family: $font-mont;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+
+            #icon {
+                scale: .8;
+            }
+        }
+
+        #edit {
+            color: #505A64;
+            border-color: #505A64;
+
+            &:hover {
+                background-color: #505A64;
+                color: white;
+            }
+        }
+
+        #delete {
+            color: red;
+            border-color: red;
+
+            &:hover {
+                background-color: red;
+                color: white;
+            }
+        }
+    }
+}

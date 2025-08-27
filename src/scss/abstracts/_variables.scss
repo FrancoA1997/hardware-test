@@ -1,0 +1,119 @@
+
+//Colors
+$primary-color: #E91E5D;
+$secondary-color: #FC8422;
+$third-color: #4778DC;
+$light-black: #212529;
+$text-gray: #343a40;
+$light-gray: #f1f3f5;
+$gray: #ededed;
+$wpp-strong-green: #005c4b;
+$light-white: #fafafa;
+$font-mont: 'Montserrat', sans-serif;
+
+
+//CUSTOM ANIMATIONS
+@keyframes bounceIn{
+	0%{
+	  opacity: 0;
+	  transform: scale(0.1) translate3d(0,0,0);
+	}
+	50%{
+	  opacity: 0.9;
+	  transform: scale(1.1);
+	}
+	90%{
+	  opacity: 1;
+	  transform: scale(0.95);
+	}
+	100%{
+	  opacity: 1;
+	  transform: scale(1) translate3d(0,0,0);
+	}
+  }
+  
+
+//ANIMATIONS OBSERVER KEYFRAMES
+
+@keyframes slide-down {
+	0% {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes slide-left {
+	0% {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes slide-right {
+	0% {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+
+	}
+
+	100% {
+		opacity: 1;
+
+	}
+}
+
+///HEADER ANIMATION CLASSES
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+		
+	}
+
+	100% {
+		opacity: 1;
+		
+	}
+}
+
+@keyframes entrance_animation-content {
+	0% {
+		opacity: 0;
+
+	}
+
+	100% {
+		opacity: 1;
+
+	}
+}
+
+@keyframes underline-grow {
+	0% {
+		width: 0%;
+	}
+
+
+	100% {
+		width: 100%;
+	}
+}
+

@@ -1,0 +1,296 @@
+@import '../../../abstracts/variables';
+
+
+.dashboardProductsList {
+    width: 100%;
+    height: calc(100dvh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: $light-gray;
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 10px 20px 0px 20px;
+        max-width: 1440px;
+        overflow: hidden;
+
+        /* Chrome, Edge and Safari */
+        *::-webkit-scrollbar {
+            height: 5px;
+            width: 5px;
+        }
+
+        *::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: transparent;
+        }
+
+        *::-webkit-scrollbar-track:hover {
+            background-color: transparent;
+        }
+
+        *::-webkit-scrollbar-track:active {
+            background-color: transparent;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            border-radius: 0px;
+            background-color: #bcbcbc;
+        }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background-color: #505A64;
+        }
+
+        *::-webkit-scrollbar-thumb:active {
+            background-color: $gray;
+        }
+
+        .filterOptions {
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 2px solid $gray;
+            z-index: 1;
+            height: 90px;
+            .clean-filters{
+                display: flex;
+                align-items: flex-end;
+                a{
+                    border: 2px solid red;
+                    background-color: red;
+                    color: white;
+                    border-radius: 5px;
+                    padding: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all .3s ease-in;
+                    &:hover{
+                        color: red;
+                        background-color: white;
+                    }
+                }
+            }
+            .filter {
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                position: relative;
+                #searchIcon{
+                    position: absolute;
+                    bottom: 18px;
+                    left: 20px;
+                    scale: .9;
+                }
+                &__item {
+                    h3 {
+                        font-size: 1em;
+                        color: $light-black;
+                        font-weight: 600;
+                        strong{
+                            font-weight: 500;
+                        }
+                    }
+                    input[type=text]{
+                        height: 100%;
+                        background-color: white;
+                        border-radius: 5px;
+                        border: 0;
+                        outline: 0;
+                        padding: 0px 40px;
+                        border: 1px solid #ededed;
+                        font-family: $font-mont;
+                    }
+                    gap: 10px;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+
+        .productsList {
+            background-color: white;
+            width: 100%;
+            height: calc(100% - 150px); 
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            gap: 10px;
+            position: relative;
+            z-index: 0;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+            .deleteModalOpen{
+                --displayDeleteModal: flex;
+              }
+            .deleteModal{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.298);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                display: var(--displayDeleteModal, none);
+                opacity: 0;
+                animation: fade-in .3s ease 0s 1 normal forwards;
+                &__container{
+                    width: 600px;
+                    height: 250px;
+                    background-color: white;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                       opacity: 0;
+                    animation:  entrance-up .3s ease .3s 1 normal forwards;
+                    span{
+                        font-size: 1.5em;
+                        text-align: center;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                    }
+                    p{
+                        color: red;
+                        font-size: 1em;
+                        font-weight: 500;
+                    }
+                    .actions{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 15px;
+                        align-items: center;
+                        justify-content: center;
+                        margin-top: 50px;
+                        button{
+                            font-weight: 600;
+                            font-size: 1em;
+                            padding: 10px;
+                            border-radius: 5px;
+                            width: 150px;
+                            cursor: pointer;
+                            transition: all .3s ease-in-out;
+                        }
+                        #confirm{
+                         background-color: red;
+                         color: white;
+                         border: 2px solid red;
+                        @media(hover:hover){
+                            &:hover{
+                                background-color: transparent;
+                                color: red;
+                            }
+                        } 
+                        }
+                        #cancel{
+                            border: 2px solid #505A64;
+                            background-color: #505A64;
+                            color: white;
+                            @media(hover:hover){
+                                &:hover{
+                                    background-color: transparent;
+                                    color: #505A64;
+                                }
+                            } 
+                        }
+                    }
+                }
+            }
+            &__headers {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                width: 100%;
+                height: 50px;
+                display: flex;
+                flex-direction: row;
+                border: 2px solid $light-black;
+
+                .headerItem {
+                    width: 16.6%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 600;
+                    font-size: 1.3em;
+                }
+            }
+        }
+
+        .pagination{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            background-color: white;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 5px 10px;
+            border-top: 2px solid $gray;
+            box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            &__item{
+                border: 1px solid $gray;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+                color: $text-gray;
+                cursor: pointer;
+                transition: all .3s ease-in-out;
+                &:hover{
+                    background-color: $light-black;
+                    color: $light-gray;
+                }
+            }
+        }
+    }
+}
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+
+	}
+
+	100% {
+		opacity: 1;
+
+	}
+}
+
+///HEADER ANIMATION CLASSES
+@keyframes entrance-up {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	100% {
+        scale: 1;
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

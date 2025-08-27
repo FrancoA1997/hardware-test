@@ -1,0 +1,81 @@
+# Versión de Docker Compose.
+version: '3.8'
+
+# Definición de los servicios de la aplicación.
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextapp
+   
+    ports:
+      - "3000:3000"
+   
+    # Define las variables de entorno necesarias para la aplicación Next.js.
+    # MONGO_URI utiliza el nombre del servicio 'mongodb' como hostname.
+    environment:
+      - DATABASE_URL=mongodb://root:root@mongodb:27017/hardware?authSource=admin
+    
+    # Conecta este servicio a la red personalizada.
+    networks:
+      - next-mongo-network
+
+  # Servicio para la base de datos MongoDB
+  mongodb:
+    # Utiliza la imagen oficial de MongoDB.
+    image: mongo:latest
+    # Mapea el puerto 27017 del contenedor al puerto 27017 de la máquina host.
+    command:
+      [
+        "mongod",
+        "--port",
+        "27017",
+        "--replSet",
+        "rs0",
+        "--bind_ip_all",
+        "--keyFile",
+        "/data/configdb/keyfile",
+      ]
+    ports:
+      - "27017:27017"
+    # Persiste los datos en un volumen para que no se pierdan al reiniciar el contenedor.
+    volumes:
+      - mongodb-data:/data/db
+      - "./init-keyfile.sh:/docker-entrypoint-initdb.d/init-keyfile.sh"
+     
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_REPLICA_SET_KEY=${MONGO_REPLICA_SET_KEY}
+    # Conecta este servicio a la red personalizada.
+    networks:
+      - next-mongo-network
+
+  mongodb-init:
+    image: mongo:latest
+    container_name: mongodb-init
+    depends_on:
+      - mongodb
+      
+    #extra_hosts:
+    # - "host.docker.internal:host-gateway"
+    # command: bash -c "chmod +x /docker-entrypoint-initdb.d/init-replica-set.sh && /docker-entrypoint-initdb.d/init-replica-set.sh && chmod +x /docker-entrypoint-initdb.d/restore.sh && /docker-entrypoint-initdb.d/restore.sh"
+    command: bash -c "chmod +x /docker-entrypoint-initdb.d/init-and-restore.sh && /docker-entrypoint-initdb.d/init-and-restore.sh"
+    volumes:
+      - ./backup:/data/backup/my_backup
+      - ./init-and-restore.sh:/docker-entrypoint-initdb.d/init-and-restore.sh 
+      # - "./init-replica-set.sh:/docker-entrypoint-initdb.d/init-replica-set.sh"
+      # - ./restore.sh:/docker-entrypoint-initdb.d/restore.sh
+    restart: no
+    networks:
+      - next-mongo-network 
+
+# Definición de la red personalizada.
+networks:
+  next-mongo-network:
+    driver: bridge
+
+# Definición de volúmenes para la persistencia de datos.
+volumes:
+  mongodb-data:

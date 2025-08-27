@@ -1,0 +1,27 @@
+@import '../../abstracts/variables';
+
+.contact {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        padding: 100px 30px;
+        background-color: $light-gray;
+        gap: 20px;
+
+        @media (max-width: 1280px) {
+            padding: 50px 10px;
+        }
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+        }
+    }
+
+}

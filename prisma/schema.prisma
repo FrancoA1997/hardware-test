@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+    binaryTargets   = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+}
+
+model Product {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  productName        String
+  productDescription String
+  productPrice       Int
+  thumbnail          Bytes
+  featured           Boolean
+  discountPercentage Int?
+  categoryId         String   @db.ObjectId
+  brandId            String   @db.ObjectId
+  galleryId          String?  @unique @db.ObjectId
+  gallery            Gallery? @relation(fields: [galleryId], references: [id], onDelete: Cascade) 
+}
+
+
+model Category {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Brand {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+}
+
+model Gallery {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  lastEditDate DateTime
+  images       Image[]
+  video        Video? // A single video
+  product      Product?
+}
+
+model Image {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  data      Bytes // Aquí puedes usar un tipo adecuado para imágenes en MongoDB
+  gallery   Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  galleryId String  @db.ObjectId
+  size Int
+  type String
+}
+
+model Video {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  data      String // Use appropriate type for videos in MongoDB
+  gallery   Gallery? @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+  galleryId String?  @unique @db.ObjectId
+}

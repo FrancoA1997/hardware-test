@@ -1,0 +1,34 @@
+@import '../abstracts/variables';
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  font-family: $font-mont;
+
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding-inline-start: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  margin: 0px!important;
+  background-color: #fafafa;
+}
+
+
+button {
+  border: none;
+  background: none;
+  font-family: $font-mont;
+}
